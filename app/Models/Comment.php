@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -16,6 +17,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null updated_at
  *
  * @method static Builder|Comment query()
+ * @method static Factory|Tag factory($count = 1)
  */
 class Comment extends Model
 {
