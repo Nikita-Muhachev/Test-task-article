@@ -17,7 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('text');
+            $table->unsignedBigInteger('article_id');
             $table->timestamps();
+
+            $table->foreign('article_id')
+                ->references('id')
+                ->on('article')
+                ->cascadeOnDelete();
         });
     }
 

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('text');
-            $table->integer('like_count')->default(0);
+            $table->integer('likes_count')->default(0);
+            $table->integer('views_count')->default(0);
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -15,11 +16,13 @@ use Illuminate\Support\Carbon;
  * @property int id
  * @property string title
  * @property string text
- * @property string like_count
+ * @property int like_count
+ * @property int views_count
  * @property Carbon|null created_at
  * @property Carbon|null updated_at
  *
  * @property Collection|Tag[] tags
+ * @property Collection|Comment[] comments
  *
  * @method static Builder|Article query()
  * @method static Factory|Tag factory($count = 1)
@@ -42,5 +45,15 @@ class Article extends Model
             'article_id',
             'tag_id'
         );
+    }
+
+    /**
+     * Связь один ко многим с таблицей comments
+     *
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('articles')->group(function () {
+    Route::get('', [ArticleController::class, 'index']);
+
+    Route::prefix('articles')->group(function () {
+        Route::get('{article}', [ArticleController::class, 'show']);
+        Route::put('{article}/like', [ArticleController::class, 'addLike']);
+        Route::put('{article}/view', [ArticleController::class, 'addView']);
+        Route::post('{article}/comment', [ArticleController::class, 'addComment']);
+    });
 });
+
+
