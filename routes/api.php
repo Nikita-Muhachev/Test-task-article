@@ -24,5 +24,3 @@ Route::prefix('articles')->group(function () {
         Route::post('{article}/comment', [ArticleController::class, 'addComment']);
     });
 });
-
-

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCommentRequest;
 use App\Http\Resources\ArticleResource;
+use App\Jobs\AddCommentJob;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -90,9 +91,7 @@ class ArticleController extends Controller
     public function addComment(Article $article, CreateCommentRequest $articleLikeRequest)
     {
         $data = $articleLikeRequest->validated();
-        $data['article_id'] = $article->id;
-        Comment::query()
-            ->create($data);
+        AddCommentJob::dispatch($data, $article);
 
         $article->load(['comments', 'tags']);
         return new ArticleResource($article);
