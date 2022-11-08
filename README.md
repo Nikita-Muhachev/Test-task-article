@@ -11,6 +11,6 @@ chmod -R 777 bootstrap/cache
 app php artisan key:generate
 php artisan migrate:fresh
 php artisan db:seed
-php artisan config:clear
 php artisan storage:link
 ```
+4. Так же нужно запустить джобы (нужны по тз) ```docker-compose exec app php artisan queue:work```
