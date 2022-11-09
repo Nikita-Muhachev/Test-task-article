@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCommentRequest;
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -61,5 +63,22 @@ class ArticleViewsController extends ArticleController
             'tags' => $article->tags,
             'comments' => $article->comments,
         ]);
+    }
+
+    /**
+     * Добавить комментарий статье
+     *
+     * @param Article $article
+     * @param CreateCommentRequest $articleLikeRequest
+     * @return Application
+     */
+    public function addComment(Article $article, CreateCommentRequest $articleLikeRequest)
+    {
+        $data = $articleLikeRequest->validated();
+        $data['article_id'] = $article->id;
+        Comment::query()
+            ->create($data);
+
+        return redirect("/articles/$article->id");
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticleViewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,6 @@ Route::prefix('articles')->group(function () {
         Route::get('', [ArticleController::class, 'show']);
         Route::put('like', [ArticleController::class, 'addLike']);
         Route::put('view', [ArticleController::class, 'addView']);
-        Route::post('comment', [ArticleController::class, 'addComment']);
+        Route::post('comment', [ArticleViewsController::class, 'addComment']);
     });
 });

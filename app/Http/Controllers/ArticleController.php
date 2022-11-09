@@ -70,21 +70,4 @@ class ArticleController extends Controller
         $article->load(['comments', 'tags']);
         return new ArticleResource($article);
     }
-
-    /**
-     * Добавить комментарий статье
-     *
-     * @param Article $article
-     * @param CreateCommentRequest $articleLikeRequest
-     * @return Application
-     */
-    public function addComment(Article $article, CreateCommentRequest $articleLikeRequest)
-    {
-        $data = $articleLikeRequest->validated();
-        $data['article_id'] = $article->id;
-        Comment::query()
-            ->create($data);
-
-        return redirect("/articles/$article->id");
-    }
 }
