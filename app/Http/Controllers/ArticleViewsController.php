@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCommentRequest;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Tag;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
@@ -44,8 +45,12 @@ class ArticleViewsController extends ArticleController
     {
         $limit = request()->has('limit') ? request()->input('limit') : 10;
         $articles = $this->articleService->index($limit);
+        $tags = Tag::all();
 
-        return view('articles', ['articles' => $articles]);
+        return view('articles', [
+            'articles' => $articles,
+            'tags' => $tags,
+        ]);
     }
 
     /**

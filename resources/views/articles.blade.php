@@ -30,6 +30,10 @@
 
 <main class="container mt-5">
 
+    @foreach ($tags as $tag)
+        <a href="/articles?tag={{$tag->name}}" class="btn btn-primary">{{$tag->name}}</a>
+    @endforeach
+
     @foreach ($articles as $article)
         <div class="card">
             <div class="card-body">

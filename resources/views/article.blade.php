@@ -35,7 +35,7 @@
         <div class="card-body">
             Теги:
             @foreach ($tags as $tag)
-                <a href="/articles/{{$article->id}}" class="btn btn-primary">{{$tag->name}}</a>
+                <a href="/articles?tag={{$tag->name}}" class="btn btn-primary">{{$tag->name}}</a>
             @endforeach
             <h5 class="card-title">{{$article->title}}</h5>
             <p class="card-text">{{$article->text}}</p>
