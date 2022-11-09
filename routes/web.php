@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleViewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,18 +13,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('', function () {
-    return view('main');
-});
+Route::get('', [ArticleViewsController::class, 'main']);
 
 Route::prefix('articles')->group(function () {
-    Route::get('', function () {
-        return view('articles');
-    });
+    Route::get('', [ArticleViewsController::class, 'articles']);
 
     Route::prefix('{article}')->group(function () {
-        Route::get('', function () {
-            return view('article');
-        });
+        Route::get('', [ArticleViewsController::class, 'article']);
     });
 });

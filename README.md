@@ -7,9 +7,9 @@
 ```
 composer install
 npm install
-app php artisan key:generate
+php artisan key:generate
 php artisan migrate:fresh
 php artisan db:seed
 php artisan storage:link
 ```
-4. Так же нужно запустить джобы (нужны по тз) ```docker-compose exec app php artisan queue:work```
+4. Так же нужно запустить джобы (нужны по тз) ```php artisan queue:work```

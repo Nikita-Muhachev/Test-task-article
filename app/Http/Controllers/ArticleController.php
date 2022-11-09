@@ -6,13 +6,11 @@ use App\Http\Requests\CreateCommentRequest;
 use App\Http\Resources\ArticleResource;
 use App\Jobs\AddCommentJob;
 use App\Models\Article;
-use App\Models\Comment;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
- * Class PackageController
+ * Class ArticleController
  * @package App\Http\Controllers
- * @group Package
  */
 class ArticleController extends Controller
 {
