@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\VarDumper\VarDumper;
@@ -28,9 +27,7 @@ class ArticleViewsController extends ArticleController
         $limit = request()->has('limit') ? request()->input('limit') : 6;
         $articles = $this->articleService->index($limit);
 
-        $articlesResource = ArticleResource::collection($articles);
-        VarDumper::dump($articlesResource->resource->toArray());
-        return view('main', $articlesResource->resource->toArray());
+        return view('main', ['articles' => $articles]);
     }
 
     /**
@@ -44,9 +41,10 @@ class ArticleViewsController extends ArticleController
      */
     public function articles()
     {
-        $articles = $this->index();
+        $limit = request()->has('limit') ? request()->input('limit') : 10;
+        $articles = $this->articleService->index($limit);
 
-        return view('articles', $articles->resource->toArray());
+        return view('articles', ['articles' => $articles]);
     }
 
     /**
@@ -56,8 +54,12 @@ class ArticleViewsController extends ArticleController
      */
     public function article(Article $article)
     {
-        $article = $this->show($article);
+        $this->addView($article);
 
-        return view('article', $article->resource->toArray());
+        return view('article', [
+            'article' => $article,
+            'tags' => $article->tags,
+            'comments' => $article->comments,
+        ]);
     }
 }

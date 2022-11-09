@@ -12,4 +12,3 @@ php artisan migrate:fresh
 php artisan db:seed
 php artisan storage:link
 ```
-4. Так же нужно запустить джобы (нужны по тз) ```php artisan queue:work```

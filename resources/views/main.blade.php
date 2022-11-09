@@ -7,10 +7,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -27,15 +28,20 @@
     </header>
 </div>
 
-@foreach ($data as $item)
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{$item->title}}</h5>
-            <p class="card-text">{{mb_strimwidth($item->text, 0, 200) . '...'}}</p>
-            <a href="/articles/{{$item->id}}" class="btn btn-primary">Подробнее</a>
+<main class="container mt-5">
+
+    @foreach ($articles as $article)
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{$article->title}}</h5>
+                <p class="card-text">{{mb_strimwidth($article->text, 0, 200) . '...'}}</p>
+                <a href="/articles/{{$article->id}}" class="btn btn-primary">Подробнее</a>
+                <p class="card-text">Количество просмотров: {{$article->views_count}}</p>
+                <p class="card-text">Дата создания: {{$article->created_at->format('d-m-Y H:i:s')}}</p>
+            </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
+</main>
 
 </body>
 </html>

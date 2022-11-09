@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCommentRequest;
 use App\Http\Resources\ArticleResource;
-use App\Jobs\AddCommentJob;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Services\ArticleService;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -54,21 +55,6 @@ class ArticleController extends Controller
     }
 
     /**
-     * Добавить лайк статье
-     *
-     * @param Article $article
-     *
-     * @return ArticleResource
-     */
-    public function addLike(Article $article)
-    {
-        $article->update([
-            'like_count' => ++$article->like_count
-        ]);
-        return new ArticleResource($article);
-    }
-
-    /**
      * Добавить просмотр статье
      *
      * @param Article $article
@@ -90,14 +76,15 @@ class ArticleController extends Controller
      *
      * @param Article $article
      * @param CreateCommentRequest $articleLikeRequest
-     * @return ArticleResource
+     * @return Application
      */
     public function addComment(Article $article, CreateCommentRequest $articleLikeRequest)
     {
         $data = $articleLikeRequest->validated();
-        AddCommentJob::dispatch($data, $article);
+        $data['article_id'] = $article->id;
+        Comment::query()
+            ->create($data);
 
-        $article->load(['comments', 'tags']);
-        return new ArticleResource($article);
+        return redirect("/articles/$article->id");
     }
 }

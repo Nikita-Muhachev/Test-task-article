@@ -29,10 +29,10 @@ class ArticleResource extends JsonResource
             'views_count' => $this->views_count,
             'created_at' => $this->created_at,
             'tags' => $this->whenLoaded('tags', function () {
-                return (new TagResource($this->tags));
+                return (TagResource::collection($this->tags));
             }),
             'comments' => $this->whenLoaded('comments', function () {
-                return (new CommentResource($this->comments));
+                return (CommentResource::collection($this->comments));
             }),
         ];
     }
