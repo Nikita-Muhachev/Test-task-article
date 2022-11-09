@@ -6,8 +6,7 @@
 3. выполнить следующие команды:
 ```
 composer install
-chmod -R 777 storage
-chmod -R 777 bootstrap/cache
+npm install
 app php artisan key:generate
 php artisan migrate:fresh
 php artisan db:seed
