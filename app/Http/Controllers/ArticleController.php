@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCommentRequest;
 use App\Http\Resources\ArticleResource;
 use App\Jobs\AddCommentJob;
 use App\Models\Article;
+use App\Services\ArticleService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -14,6 +15,13 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  */
 class ArticleController extends Controller
 {
+    public ArticleService $articleService;
+
+    public function __construct()
+    {
+        $this->articleService = app(ArticleService::class);
+    }
+
     /**
      * Получение списка всех статей.
      *
@@ -27,9 +35,7 @@ class ArticleController extends Controller
     {
         $limit = request()->has('limit') ? request()->input('limit') : 10;
 
-        $articles = Article::query()
-            ->orderByDesc('created_at')
-            ->paginate($limit);
+        $articles = $this->articleService->index($limit);
 
         return ArticleResource::collection($articles);
     }

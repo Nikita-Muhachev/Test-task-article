@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * App\Models\Pass
+ * App\Models
  *
  * @property int id
  * @property string name
@@ -17,10 +18,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property Collection|Article[] articles
  *
  * @method static Builder|Tag query()
- * @method static Factory|Tag factory($count = 1)
  */
 class Tag extends Model
 {
+    use HasFactory;
+
     protected $table = 'tags';
     protected $guarded = ['id'];
 

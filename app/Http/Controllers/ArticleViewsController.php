@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Contracts\Foundation\Application;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\VarDumper\VarDumper;
 
 /**
@@ -13,6 +13,7 @@ use Symfony\Component\VarDumper\VarDumper;
  */
 class ArticleViewsController extends ArticleController
 {
+
     /**
      * Получение списка всех статей для страницы main.
      *
@@ -24,12 +25,12 @@ class ArticleViewsController extends ArticleController
      */
     public function main()
     {
-        request()->setJson(new ParameterBag(["limit" => 6]));
+        $limit = request()->has('limit') ? request()->input('limit') : 6;
+        $articles = $this->articleService->index($limit);
 
-        $articles = $this->index();
-
-        VarDumper::dump($articles);
-        return view('main', $articles);
+        $articlesResource = ArticleResource::collection($articles);
+        VarDumper::dump($articlesResource->resource->toArray());
+        return view('main', $articlesResource->resource->toArray());
     }
 
     /**
@@ -43,11 +44,9 @@ class ArticleViewsController extends ArticleController
      */
     public function articles()
     {
-        request()->setJson(new ParameterBag(["limit" => 10]));
-        
         $articles = $this->index();
 
-        return view('articles', $articles);
+        return view('articles', $articles->resource->toArray());
     }
 
     /**
@@ -59,6 +58,6 @@ class ArticleViewsController extends ArticleController
     {
         $article = $this->show($article);
 
-        return view('article', $article);
+        return view('article', $article->resource->toArray());
     }
 }

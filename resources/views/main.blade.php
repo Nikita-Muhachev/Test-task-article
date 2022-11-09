@@ -8,9 +8,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" ></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -26,6 +26,16 @@
         </ul>
     </header>
 </div>
+
+@foreach ($data as $item)
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{$item->title}}</h5>
+            <p class="card-text">{{mb_strimwidth($item->text, 0, 200) . '...'}}</p>
+            <a href="/articles/{{$item->id}}" class="btn btn-primary">Подробнее</a>
+        </div>
+    </div>
+@endforeach
 
 </body>
 </html>

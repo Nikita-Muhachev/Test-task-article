@@ -7,7 +7,7 @@ use Exception;
 
 /***
  * Class CreateCommentRequest
- * @package App\Http\Requests\Pass
+ * @package App\Http\Requests
  */
 class CreateCommentRequest extends FormRequest
 {

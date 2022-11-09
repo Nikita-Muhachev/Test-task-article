@@ -6,9 +6,9 @@ use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 /**
- * Class DeviceTableSeeder
+ * Class TagSeeder
  */
-class TagTableSeeder extends Seeder
+class TagSeeder extends Seeder
 {
     /**
      * Run the database seeds.

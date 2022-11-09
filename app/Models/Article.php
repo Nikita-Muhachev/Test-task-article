@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * App\Models\Pass
+ * App\Models
  *
  * @property int id
  * @property string title
@@ -25,10 +25,11 @@ use Illuminate\Support\Carbon;
  * @property Collection|Comment[] comments
  *
  * @method static Builder|Article query()
- * @method static Factory|Tag factory($count = 1)
  */
 class Article extends Model
 {
+    use HasFactory;
+
     protected $table = 'articles';
     protected $guarded = ['id'];
 

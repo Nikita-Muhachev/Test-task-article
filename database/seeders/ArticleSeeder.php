@@ -7,9 +7,9 @@ use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 /**
- * Class DeviceTableSeeder
+ * Class ArticleSeeder
  */
-class ArticleTableSeeder extends Seeder
+class ArticleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,7 +22,7 @@ class ArticleTableSeeder extends Seeder
         $articles = Article::factory(20)->create();
 
         foreach ($articles as $article) {
-            $tags = Tag::query()->inRandomOrder()->limit(rand(1, 4));
+            $tags = Tag::query()->inRandomOrder()->limit(rand(1, 4))->get();
             $article->tags()->attach($tags);
         }
     }
