@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCommentRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
-use App\Models\Comment;
 use App\Services\ArticleService;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**

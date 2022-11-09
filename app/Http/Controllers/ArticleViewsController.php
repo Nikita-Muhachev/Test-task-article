@@ -6,7 +6,6 @@ use App\Http\Requests\CreateCommentRequest;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Contracts\Foundation\Application;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Class ArticleViewsController
